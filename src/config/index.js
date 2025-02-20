@@ -11,7 +11,7 @@ export const config = {
     const value = _config[key];
     if (!value) {
       console.error(
-        `Key ${key} variable not found. Make sure to pass environment variables.`
+        `Key ${key} variable not found. Make sure to pass environment variable.`
       );
     }
     return _config[key];
