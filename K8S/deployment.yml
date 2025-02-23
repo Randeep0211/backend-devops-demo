@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-backend-app-deployment
+  namespace: backend-app
+  labels:
+    app: node-backend-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-backend-app
+  template:
+    metadata:
+      namespace: backend-app
+      labels:
+        app: node-backend-app
+    spec:
+      containers:
+        - name: node-backend-app-container
+          image: randeepgreyghost94/react-vite-devops-app
+          ports:
+            - containerPort: 5152
