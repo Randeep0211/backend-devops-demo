@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install node packages
-RUN npm Install
+RUN npm install
 
 # Stage-2 
 
