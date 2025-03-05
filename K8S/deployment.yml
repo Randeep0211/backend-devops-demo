@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
         - name: node-backend-app-container
-          image: randeepgreyghost94/react-vite-devops-app
+          image: randeepgreyghost94/backend-devops-demo
           ports:
             - containerPort: 5152
