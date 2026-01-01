@@ -1,35 +1,24 @@
-# Import Base Image from DockerHub
-FROM node:23 AS development
+FROM node:22-alpine AS builder
 
-# Work Directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy Package.json and Package-lock.json
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
-# Install node packages
-RUN npm install
-
-# Stage-2 
-
-FROM node:23-alpine3.20
-
-WORKDIR /app
-
-# Copying the entire project
+RUN npm ci
 
 COPY . .
 
-# Copy all the code & packages in the work directory of stage-2
+#####################
 
-COPY --from=development /app/node_modules ./node_modules
+FROM node:22-alpine AS release
 
-# Exposing PORT
+WORKDIR /usr/src/app 
+
+USER node
+
+COPY --from=builder --chown=node:node /usr/src/app ./
+
 EXPOSE 3001
 
-# Entry point
-ENTRYPOINT [ "npm"]
+ENTRYPOINT [ "npm", "run", "start" ]
 
-#CMD to run project. Check package-lock file for reference
-
-CMD ["start"]
