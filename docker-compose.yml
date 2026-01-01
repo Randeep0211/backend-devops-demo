@@ -7,5 +7,5 @@ services:
       target: release
 
     image: randeepgreyghost94/backend-todo:v1
-    expose:
-      - "3001"
+    environment:
+      - PORT=3001
